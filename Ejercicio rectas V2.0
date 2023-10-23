@@ -1,0 +1,88 @@
+import math
+operacion = input("¿Desea realizar la paramterización de dos rectas? ")
+def Parametrizacion():
+    Decimales = int(input("Ingrese la cantidad de decimales que desa usar: "))
+    print("Ingrese los valores de dos puntos en la recta A")
+    Recta_a_X1 = float(input ("Ingrese el valor de X para el punto 1 de la recta A: "))
+    Recta_a_Y1 = float(input ("Ingrese el valor de Y para el punto 1 de la recta A: "))
+    Recta_a_X2 = float(input ("Ingrese el valor de X para el punto 2 de la recta A: "))
+    Recta_a_Y2 = float(input ("Ingrese el valor de Y para el punto 2 de la recta A: "))
+    print("Ingrese los valores de dos puntos en la recta B")
+    Recta_b_X1 = float(input ("Ingrese el valor de X para el punto 1 de la recta B: "))
+    Recta_b_Y1 = float(input ("Ingrese el valor de Y para el punto 1 de la recta B: "))
+    Recta_b_X2 = float(input ("Ingrese el valor de X para el punto 2 de la recta B: "))
+    Recta_b_Y2 = float(input ("Ingrese el valor de Y para el punto 2 de la recta B: "))
+    print("----------------------------------------------------------")
+    if((Recta_a_X1-Recta_a_X2)==0):
+        Error_a=1
+        print("Error en valores de X en recta a")
+    else:
+        Error_a=0
+    if((Recta_b_X1-Recta_b_X2)==0):
+        Error_b = 1
+        print("Error en valores de X en recta b")
+    else:
+        Error_b=0
+    if ((Error_b==0) and (Error_a==0)):
+        Pendiente_a=((Recta_a_Y1-Recta_a_Y2)/(Recta_a_X1-Recta_a_X2))
+        Pendiente_a_impr = round(Pendiente_a, Decimales)
+        Pendiente_b=((Recta_b_Y1-Recta_b_Y2)/(Recta_b_X1-Recta_b_X2))
+        Pendiente_b_impr = round(Pendiente_b, Decimales)
+        Perpendicularidad = -1/Pendiente_b
+        Absisa_a = Recta_a_Y2-Pendiente_a*Recta_a_X2
+        Absisa_a_impr = round(Absisa_a, Decimales)
+        Absisa_b = Recta_b_Y2-Pendiente_b*Recta_b_X2
+        Absisa_b_impr = round(Absisa_b, Decimales)
+    if (Error_b==0 and Error_a==0):
+        if(Pendiente_a == Pendiente_b):
+            print ("las rectas A y B son paralelas")
+            angulo = abs((math.atan((Pendiente_a-Pendiente_b)/(1+Pendiente_a*Pendiente_b)))*180/3.14)
+            angulo_impr = round(angulo, Decimales)
+            print(f"El angulo que se forma entre las dos rectas es: {angulo_impr}°")
+        elif(Pendiente_a == Perpendicularidad):
+            print ("las rectas A y B son perpendiculares")
+            print("El angulo que se forma entre las dos rectas es: 90°")
+        else:
+            angulo = abs((math.atan((Pendiente_a-Pendiente_b)/(1+Pendiente_a*Pendiente_b)))*180/3.14)
+            angulo_impr = round(angulo, Decimales)
+            print(f"El angulo que se forma entre las dos rectas es: {angulo_impr}°")
+        print(f"la pendiente de la recta A es: {Pendiente_a_impr}")
+        print(f"la pendiente de la recta B es: {Pendiente_b_impr}")
+        if(Pendiente_a!=0):
+            if (Absisa_a > 0):
+                print(f"La ecuacion de la recta A es: Y= {Pendiente_a_impr}X  + {Absisa_a_impr}")
+            elif (Absisa_a < 0):
+                print(f"La ecuacion de la recta A es: Y= {Pendiente_a_impr}X {Absisa_a_impr}")
+            elif (Absisa_a==0):
+                print(f"La ecuacion de la recta A es: Y= {Pendiente_a_impr}X")
+        else:
+            print(f"La ecuacion de la recta A es: Y= {Absisa_a_impr}")
+        if(Pendiente_b!=0):       
+            if (Absisa_b > 0):
+                print(f"La ecuacion de la recta B es: Y= {Pendiente_b_impr}X + {Absisa_b_impr}")
+            elif (Absisa_b < 0):
+                print(f"La ecuacion de la recta B es: Y= {Pendiente_b_impr}X {Absisa_b_impr}")
+            elif (Absisa_b == 0):
+                print(f"La ecuacion de la recta B es: Y= {Pendiente_b_impr}X")
+        else:
+            print(f"La ecuacion de la recta A es: Y= {Absisa_b_impr}")
+        if (Pendiente_b!=Pendiente_a):
+            Punto_x = (-Pendiente_b*Recta_b_X2+Pendiente_a*Recta_a_X2+Recta_b_Y2-Recta_a_Y2)/(Pendiente_a-Pendiente_b)
+            punto_x_impr = round(Punto_x,Decimales)
+            punto_y = (Pendiente_a*Punto_x+Absisa_a)
+            punto_y_impr = round(punto_y,Decimales)
+            print(f"El punto de intersección entre las rectas es: ({punto_x_impr} ; {punto_y_impr})")
+        else:
+            print("Las rectas no tienen un punto de intersección")
+        print("Puntos de corte para la recta A: ")
+        Corte_X_A = (-Absisa_a/Pendiente_a)
+        Corte_X_A_impr = round(Corte_X_A,Decimales) 
+        print(f" X= {Corte_X_A_impr}     Y= {Absisa_a_impr}")
+        print("Puntos de corte para la recta B: ")
+        Corte_X_B = (-Absisa_b/Pendiente_b)
+        Corte_X_B_impr = round(Corte_X_B,Decimales) 
+        print(f" X= {Corte_X_B_impr}     Y= {Absisa_b_impr}")
+        print("-------------------------------------------------------")
+while(operacion =="si"):
+        Parametrizacion()
+        operacion = input("¿Desea realizar otra operación? ")
